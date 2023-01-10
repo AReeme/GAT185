@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  prefab: {fileID: 0}
 --- !u!4 &1703040721
 Transform:
   m_ObjectHideFlags: 0
