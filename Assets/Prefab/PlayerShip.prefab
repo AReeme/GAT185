@@ -42,6 +42,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
+    - target: {fileID: 1165255073185956, guid: ad7c52a4ec5f9b948bbfc45336f4fa48, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4244429690876308, guid: ad7c52a4ec5f9b948bbfc45336f4fa48, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -117,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d59036105757ad4380f2b3cc958be6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 15
   rotationRate: 180
   prefab: {fileID: 567530866280854762, guid: a1d6f9424ea5ebf4f865199d1c9bd0af, type: 3}
   bulletSpawnLocation: {fileID: 5369267406417049582}

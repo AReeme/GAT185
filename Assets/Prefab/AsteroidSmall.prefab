@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1379459666093482, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_Name
-      value: Asteroid
+      value: AsteroidSmall
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_RootOrder
@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,9 +72,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1429783580402905889, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
+      propertyPath: speed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429783580402905889, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: explosion
       value: 
       objectReference: {fileID: 1290715649332758, guid: e85f0214971bd304580209edf626883b, type: 3}
+    - target: {fileID: 1429783580402905889, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
+      propertyPath: rotationRate
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64873779381969402, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
