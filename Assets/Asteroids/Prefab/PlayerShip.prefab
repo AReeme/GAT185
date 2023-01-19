@@ -109,6 +109,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1165255073185956, guid: ad7c52a4ec5f9b948bbfc45336f4fa48, type: 3}
   m_PrefabInstance: {fileID: 4667609690571975944}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &-3839721836508001327
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666447759870750124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8653564
+  m_Center: {x: -0.0000009536743, y: 0, z: 0}
 --- !u!114 &1401786712599545124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d59036105757ad4380f2b3cc958be6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 50
   rotationRate: 180
   prefab: {fileID: 567530866280854762, guid: a1d6f9424ea5ebf4f865199d1c9bd0af, type: 3}
   bulletSpawnLocation: {fileID: 5369267406417049582}
