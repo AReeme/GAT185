@@ -39,4 +39,19 @@ public class Player : MonoBehaviour
             GameObject go = Instantiate(prefab, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            var gameManager = FindObjectOfType<AsteroidGameManager>();
+            gameManager?.SetGameOver();
+
+            //Destroy(gameObject);
+
+            //Debug.Log(other.gameObject);
+
+        }
+    }
 }

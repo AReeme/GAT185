@@ -25,5 +25,6 @@ public class Coin : Collidable
 
         Instantiate(pickupFx, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        
     }
 }
