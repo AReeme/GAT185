@@ -2,29 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : Collidable
+[RequireComponent(typeof(CollisionEvent))]
+public class Coin : Interactable
 {
-    [SerializeField] GameObject pickupFx;
-
     void Start()
     {
-        onEnter += OnCoinPickup;
+        GetComponent<CollisionEvent>().onEnter += OnInteract;
     }
 
-    void Update()
-    {
-        
-    }
-
-    void OnCoinPickup(GameObject go)
+    public override void OnInteract(GameObject go)
     {
         if (go.TryGetComponent<RollerPlayer>(out RollerPlayer player))
         {
             player.AddPoints(100);
         }
 
-        Instantiate(pickupFx, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        if (interactFX != null) Instantiate(interactFX, transform.position, Quaternion.identity);
+        if (destroyOnInteract) Destroy(gameObject);
         
     }
 }
