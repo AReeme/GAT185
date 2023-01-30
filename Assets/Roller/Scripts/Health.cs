@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
 	public Action onDamage;
 	public Action onHeal;
 	public Action onDeath;
+	public Action onJumpPower;
+	public Action onWin;
 
 	private void Awake()
 	{

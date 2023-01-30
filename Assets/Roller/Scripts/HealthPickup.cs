@@ -6,10 +6,11 @@ using UnityEngine;
 public class HealthPickup : Interactable
 {
 	[SerializeField] private float heal;
-
+	[SerializeField] AudioSource pickup;
 	void Start()
     {
 		GetComponent<CollisionEvent>().onEnter += OnInteract;
+		GetComponent<AudioSource>();
     }
 
 	public override void OnInteract(GameObject target)
@@ -19,6 +20,11 @@ public class HealthPickup : Interactable
 			health.OnApplyHealth(heal);
 		}
 
-		if (destroyOnInteract) Destroy(gameObject);
+		if (destroyOnInteract)
+		{
+			Destroy(gameObject);
+			pickup.Play();
+		}
+
 	}
 }

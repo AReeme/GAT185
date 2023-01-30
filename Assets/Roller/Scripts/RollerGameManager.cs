@@ -10,8 +10,13 @@ public class RollerGameManager : Singleton<RollerGameManager>
     [SerializeField] TMP_Text scoreUI;
     [SerializeField] GameObject titleUI;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] GameObject gameWinUI;
 
     [SerializeField] AudioSource gameMusic;
+    [SerializeField] AudioSource healthPickup;
+    [SerializeField] AudioSource coinPickup;
+    [SerializeField] AudioSource jumpPickup;
+    
 
     [SerializeField] GameObject playerPrefab;
     [SerializeField] Transform playerStart;
@@ -21,9 +26,10 @@ public class RollerGameManager : Singleton<RollerGameManager>
         TITLE,
         START_GAME,
         PLAY_GAME,
-        GAME_OVER
+        GAME_OVER,
+        GAME_WIN
     }
-    State state = State.TITLE;
+    public State state = State.TITLE;
     float stateTimer = 0;
 
     private void Start()
@@ -57,6 +63,14 @@ public class RollerGameManager : Singleton<RollerGameManager>
                     state = State.TITLE;
                 }
                 break;
+            case State.GAME_WIN:
+				stateTimer -= Time.deltaTime;
+				if (stateTimer <= 0)
+				{
+					gameWinUI.SetActive(false);
+					state = State.TITLE;
+				}
+				break;
             default:
                 break;
         }
@@ -64,12 +78,20 @@ public class RollerGameManager : Singleton<RollerGameManager>
 
 	public void SetHealth(int health)
     {
+        healthPickup.Play();
         healthMeter.value = Mathf.Clamp(health, 0, 100);
     }
 
     public void SetScore(int score) 
     {
+        coinPickup.Play();
         scoreUI.text = "Score: " + score.ToString();
+    }
+
+    public void SetJump(int jump)
+    {
+        jumpPickup.Play();
+        jump *= 5;
     }
 
     public void SetGameOver()
@@ -77,6 +99,14 @@ public class RollerGameManager : Singleton<RollerGameManager>
         gameOverUI.SetActive(true);
         gameMusic.Stop();
         state = State.GAME_OVER;
+        stateTimer = 3;
+    }
+
+    public void SetWin()
+    {
+        gameWinUI.SetActive(true);
+        gameMusic.Stop();
+        state = State.GAME_WIN;
         stateTimer = 3;
     }
 

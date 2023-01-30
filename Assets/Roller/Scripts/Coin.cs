@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionEvent))]
 public class Coin : Interactable
 {
-    void Start()
+	[SerializeField] AudioSource pickup;
+
+	void Start()
     {
         GetComponent<CollisionEvent>().onEnter += OnInteract;
-    }
+		GetComponent<AudioSource>();
+	}
 
     public override void OnInteract(GameObject go)
     {
@@ -18,7 +22,10 @@ public class Coin : Interactable
         }
 
         if (interactFX != null) Instantiate(interactFX, transform.position, Quaternion.identity);
-        if (destroyOnInteract) Destroy(gameObject);
-        
-    }
+		if (destroyOnInteract)
+		{
+			Destroy(gameObject);
+		}
+
+	}
 }

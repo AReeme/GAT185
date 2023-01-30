@@ -8,10 +8,12 @@ public class RollerPlayer : MonoBehaviour
     [SerializeField] private float maxForce = 5;
     [SerializeField] private float groundRayLength = 1;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] AudioSource jump;
+    [SerializeField] int jumpPower = 5;
 
-    private int score;
+	private int score;
 
-    private Vector3 force;
+	private Vector3 force;
     private Rigidbody rb;
 
     void Start()
@@ -24,6 +26,8 @@ public class RollerPlayer : MonoBehaviour
         GetComponent<Health>().onDamage += OnDamage;
         GetComponent<Health>().onDeath += OnDeath;
         GetComponent<Health>().onHeal += OnHeal;
+        GetComponent<Health>().onJumpPower += OnJumpPower;
+        GetComponent<Health>().onWin += OnWin;
 		RollerGameManager.Instance.SetHealth((int)GetComponent<Health>().health);
 	}
 
@@ -43,7 +47,8 @@ public class RollerPlayer : MonoBehaviour
 
         if (onGround && Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            jump.Play();
         }
     }
 
@@ -56,6 +61,7 @@ public class RollerPlayer : MonoBehaviour
     {
         score += points;
         RollerGameManager.Instance.SetScore(score);
+        
     }
 
     public void OnDamage()
@@ -72,5 +78,16 @@ public class RollerPlayer : MonoBehaviour
     {
         RollerGameManager.Instance.SetGameOver();
         Destroy(gameObject);
+    }
+
+	public void OnWin()
+	{
+		RollerGameManager.Instance.SetWin();
+        Destroy(gameObject);
+	}
+
+    public void OnJumpPower()
+    {
+        jumpPower += 5;
     }
 }
