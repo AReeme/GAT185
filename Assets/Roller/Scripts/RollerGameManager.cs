@@ -6,7 +6,11 @@ using TMPro;
 
 public class RollerGameManager : Singleton<RollerGameManager>
 {
-    [SerializeField] Slider healthMeter;
+	[Header("Events")]
+	[SerializeField] EventRouter startGameEvent;
+	[SerializeField] EventRouter stopGameEvent;
+
+	[SerializeField] Slider healthMeter;
     [SerializeField] TMP_Text scoreUI;
     [SerializeField] GameObject titleUI;
     [SerializeField] GameObject gameOverUI;
@@ -16,9 +20,9 @@ public class RollerGameManager : Singleton<RollerGameManager>
     [SerializeField] AudioSource healthPickup;
     [SerializeField] AudioSource coinPickup;
     [SerializeField] AudioSource jumpPickup;
-    
 
-    [SerializeField] GameObject playerPrefab;
+	[SerializeField] EventRouter winGameEvent;
+	[SerializeField] GameObject playerPrefab;
     [SerializeField] Transform playerStart;
 
     public enum State
@@ -34,8 +38,8 @@ public class RollerGameManager : Singleton<RollerGameManager>
 
     private void Start()
     {
-
-    }
+		winGameEvent.onEvent += SetWin;
+	}
 
 	public void Update()
 	{
@@ -47,6 +51,7 @@ public class RollerGameManager : Singleton<RollerGameManager>
                 Cursor.visible = true;
                 break;
             case State.START_GAME:
+                startGameEvent.Notify();
                 titleUI.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Instantiate(playerPrefab, playerStart.position, playerStart.rotation);
@@ -96,6 +101,7 @@ public class RollerGameManager : Singleton<RollerGameManager>
 
     public void SetGameOver()
     {
+        stopGameEvent.Notify();
         gameOverUI.SetActive(true);
         gameMusic.Stop();
         state = State.GAME_OVER;
