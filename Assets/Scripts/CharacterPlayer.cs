@@ -11,11 +11,13 @@ public class CharacterPlayer : MonoBehaviour
     [SerializeField] private float gravity = Physics.gravity.y;
     [SerializeField] private float turnRate = 10;
     [SerializeField] private float jumpHeight = 2;
+    [SerializeField] private Animator animator;
 
     CharacterController characterController;
     PlayerInputActions playerInput;
     Camera mainCamera;
     Vector3 velocity = Vector3.zero;
+    float inAirTime = 0;
 
     private void OnEnable()
     {
@@ -52,13 +54,16 @@ public class CharacterPlayer : MonoBehaviour
         {
             velocity.x = direction.x * speed;
             velocity.z = direction.z * speed;
+            inAirTime = 0;
             if(playerInput.Player.Jump.triggered)
             {
+                animator.SetTrigger("jump");
                 velocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
             }
         }
         else
         {
+            inAirTime += Time.deltaTime;
             velocity.x = direction.x * speed/2;
             velocity.z = direction.z * speed/2;
             velocity.y += gravity * Time.deltaTime;
@@ -67,8 +72,16 @@ public class CharacterPlayer : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
         Vector3 look = direction;
         look.y = 0;
+        if(look.magnitude > 0) 
+        { 
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), turnRate * Time.deltaTime);
+        }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), turnRate * Time.deltaTime);
+        // set animator parameters
+        animator.SetFloat("speed", characterController.velocity.magnitude);
+        animator.SetFloat("velocityY", characterController.velocity.y);
+        animator.SetFloat("inAirTime", inAirTime);
+        animator.SetBool("isGrounded", characterController.isGrounded);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -96,5 +109,14 @@ public class CharacterPlayer : MonoBehaviour
 
         // Apply the push
         body.velocity = pushDir * hitForce;
+    }
+
+    public void OnLeftClickSpawn(GameObject go)
+    {
+        Transform bone = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
+        Instantiate(go, bone.position, bone.rotation);
+
+        Transform bone1 = animator.GetBoneTransform(HumanBodyBones.RightFoot);
+        Instantiate(go, bone1.position, bone1.rotation);
     }
 }
