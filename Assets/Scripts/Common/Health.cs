@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float maxHealth = 100;
-
-    public float health { get; set; }
+    [SerializeField] public float maxHealth = 100;
+	[SerializeField] public float health = 0;
     private bool isDead = false;
 
 	public Action onDamage;

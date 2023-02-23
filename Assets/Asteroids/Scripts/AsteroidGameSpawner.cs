@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class AsteroidGameSpawner : MonoBehaviour
 {
     [Range(1, 10)] public float minTime = 3;
     [Range(1, 10)] public float maxTime = 5;
